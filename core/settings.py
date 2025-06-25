@@ -80,11 +80,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'moderationDb',       # Match the exact DB name (case-sensitive)
+        'USER': 'postgres',           # The DB owner you used (as shown above)
+        'PASSWORD': '060122',  # Replace with the correct password for postgres
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
