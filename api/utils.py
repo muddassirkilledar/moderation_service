@@ -2,7 +2,7 @@ import requests
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env (only needed once in the whole app, ideally in settings.py)
+
 load_dotenv()
 
 HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/unitary/toxic-bert"
@@ -25,7 +25,7 @@ def check_toxicity(text):
 
     try:
         result = response.json()
-        print("Hugging Face API response:", result)  # <-- ADD THIS LINE
+        print("Hugging Face API response:", result)  
 
     except Exception:
         return False, {}

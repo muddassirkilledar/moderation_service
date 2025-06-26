@@ -1,3 +1,8 @@
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 """
 Django settings for core project.
 
@@ -20,10 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qgxvd&o7r(l*8=wp@)%z4%23xdx-cc^2s&!ux)%_s-=r$j!am*'
-
+SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-key')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', '0') == '1'
 
 ALLOWED_HOSTS = []
 
@@ -81,11 +85,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'moderationDb',       # Match the exact DB name (case-sensitive)
-        'USER': 'postgres',           # The DB owner you used (as shown above)
-        'PASSWORD': '060122',  # Replace with the correct password for postgres
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
