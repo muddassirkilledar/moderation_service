@@ -8,7 +8,7 @@ A Django-based microservice for detecting and flagging inappropriate user conten
 
 - ✅ User Signup & Login (JWT-based authentication)
 - 📝 Submit comments or reviews
-- 🤖 Auto-detect inappropriate content using OpenAI's Moderation API
+- 🤖 Auto-detect inappropriate content using Hugging Face Moderation API
 - ⚠️ Flag and store inappropriate content for moderation
 - 🔐 JWT authentication (via `djangorestframework-simplejwt`)
 - 🐘 PostgreSQL backend
