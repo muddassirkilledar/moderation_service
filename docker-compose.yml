@@ -10,6 +10,8 @@ services:
       - .env
     depends_on:
       - db
+      - redis
+      - worker
 
   db:
     image: postgres:14
@@ -21,6 +23,17 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5433:5432" 
+  redis:
+    image: redis:7
+  worker:
+    build: .
+    command: celery -A core worker --loglevel=info
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+    env_file:
+      - .env
 
 volumes:
   postgres_data:
