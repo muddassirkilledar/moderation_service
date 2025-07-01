@@ -2,8 +2,8 @@
 FROM python:3.11-slim
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Set working directory
 WORKDIR /code
@@ -22,5 +22,5 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy the rest of the app
 COPY . .
 
-# Start the server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Start Gunicorn in production
+CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000"]
