@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Django SQLite (if used in dev)
+*.sqlite3
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.*
+env/
+venv/
+
+# Node (if used anywhere in frontend)
+node_modules/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# Git
+.git
+.gitignore
+
+# Docker/Compose files themselves
+Dockerfile
+docker-compose.yml
+
+# Tests and local scripts
+tests/
+*.md
+*.json
+*.yml
+*.yaml
