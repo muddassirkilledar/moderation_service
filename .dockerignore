@@ -12,7 +12,7 @@ venv/
 env/
 
 # Git
-.git
+
 .gitignore
 
 # IDE/editor settings
