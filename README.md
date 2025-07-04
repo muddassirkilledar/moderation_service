@@ -1,37 +1,58 @@
-# moderation_service
+# 🛡️ AI-Powered Moderation Microservice
 
-A Django-based microservice for detecting and flagging inappropriate user content (comments or reviews) using Hugging Face Moderation API. Designed for use in social platforms, forums, and UGC websites.
+This microservice scans user-generated content (comments) for inappropriate or toxic content using AI-based moderation. It is designed for integration into websites or social media platforms to automatically flag toxic comments and alert moderators.
 
 ---
 
 ## 🚀 Features
 
-- ✅ User Signup & Login (JWT-based authentication)
-- 📝 Submit comments or reviews
-- 🤖 Auto-detect inappropriate content using Hugging Face Moderation API
-- ⚠️ Flag and store inappropriate content for moderation
-- 🔐 JWT authentication (via `djangorestframework-simplejwt`)
-- 🐘 PostgreSQL backend
-- 🐳 Dockerized for easy setup
-- 📦 API-ready for frontend or other services
+- 🔐 User Registration & JWT Authentication
+- 💬 Post and Store Comments
+- 🤖 AI-Based Content Moderation (Hugging Face `unitary/toxic-bert`)
+- 🚩 Flagging Inappropriate Comments (confidence > 0.5)
+- 📬 Email Notification for Flagged Comments
+- 🪄 Asynchronous Task Handling (Celery + Redis)
+- 🐳 Dockerized for Easy Deployment
+- 🧑‍💼 Django Admin Interface for Moderators
 
 ---
 
-## 🧱 Tech Stack
+## 📦 Tech Stack
 
-- Backend: **Django + Django REST Framework**
-- Authentication: **JWT (SimpleJWT)**
-- AI Moderation: **Hugging Face**
-- Database: **PostgreSQL**
-- Containerization: **Docker & Docker Compose**
+- Python, Django REST Framework
+- Celery + Redis (for async task queue)
+- Hugging Face Inference API
+- Docker & Docker Compose
+- PostgreSQL (via Docker)
+- AWS EC2 (for deployment)
 
 ---
-## Run With Docker
 
+## 🧪 API Endpoints
+
+| Endpoint | Method | Description |
+|---------|--------|-------------|
+| `/api/signup/` | `POST` | User Registration |
+| `/api/login/` | `POST` | User Login (JWT) |
+| `/api/comments/` | `POST` | Post a Comment (Moderation Applied) |
+
+### 🔗 Postman Collection
+
+[Click here to access the API collection](https://interstellar-firefly-414100.postman.co/workspace/My-Workspace~e0df8bc6-21ef-42f0-8185-34cdb4082ace/collection/37449109-074ecca6-a0e8-4507-a5d0-1bc10f3a79c0?action=share&creator=37449109)
+
+---
+## 🧰 Running Locally (Docker)
+
+```bash
+# Clone repo
+git clone https://github.com/muddassirkilledar/moderation_service.git
+cd moderation_service
+
+# Build and run containers
 docker-compose up --build
-Then open: http://localhost:8000
 
-## Run Migrations
-
+# Run DB migrations
 docker-compose exec web python manage.py migrate
 
+# Create superuser
+docker-compose exec web python manage.py createsuperuser
