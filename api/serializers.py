@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Comment, User
+from .models import Comment, User, Review
 
 class CommentSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)  # Uses User.__str__, which returns the email
@@ -19,3 +19,11 @@ class SignupSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+    
+class ReviewSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Review
+        fields = ['id', 'user', 'content', 'flagged', 'flag_reason', 'created_at']
+        read_only_fields = ['user', 'flagged', 'flag_reason', 'created_at']

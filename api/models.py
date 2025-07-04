@@ -49,3 +49,23 @@ class FlaggedComment(models.Model):
 
     def __str__(self):
         return f"Flagged by {self.user.email}: {self.reason}"
+
+class Review(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    flagged = models.BooleanField(default=False)
+    flag_reason = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.user.email} at {self.created_at}"
+
+class FlaggedReview(models.Model):
+    review = models.OneToOneField(Review, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    reason = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Flagged Review by {self.user.email}: {self.reason}"
